@@ -51,6 +51,15 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+# certificates files
+*.pem
+*.crt
+*.key
+*.csr
+*.p12
+*.pfx
+
+
 # Translations
 *.mo
 *.pot
