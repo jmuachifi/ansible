@@ -25,7 +25,7 @@
 
     - name: Copy index.html.j2
       template: >
-        src=tamplates/index.html.j2
+        src=templates/index.html.j2
         dest=/usr/share/nginx/html/index.html
 
     - name: Restart nginx
