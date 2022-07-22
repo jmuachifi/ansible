@@ -1,0 +1,17 @@
+---
+
+- name: Create Nginx image with docker 
+  hosts: localhost
+  connection: local
+  become: True
+  tasks:
+    - name: Create Nginx image
+      docker_image:
+        build:
+          path: ./nginx
+        source: build
+        name: jmuachifi/nginx-ghost
+        state: present
+        force_source: "{{ force_source | default(false) }}"
+        tag:  "{{ tag | default('latest') }}"
+      

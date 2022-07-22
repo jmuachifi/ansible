@@ -1,0 +1,33 @@
+---
+
+- name: Publish image to doker hub
+  hosts: localhost
+  connection: local
+  become: True
+  gather_facts: false
+  ignore_errors: yes
+
+  vars_prompt:
+    - name: username
+      prompt: Enter Docker Registry username
+    - name: password
+      prompt: Enter Docker Registry password
+      private: true
+
+  tasks:
+
+    - name: Authentication with repository
+      docker_login:
+        username: "{{username}}"
+        password: "{{password}}"
+      tags:
+        - login
+      
+    - name: Push image up
+      docker_image:
+        name: "jmuachifi/nginx-ghost"
+        push: true
+        source: local
+        state: present
+      tags:
+        - push

@@ -1,0 +1,11 @@
+pull the image and run the container
+ansible localhost -m docker_container -a "name=test-ghost image=ghost ports=8000:2368"
+
+list the container up
+docker ps --format "table {{.ID }} {{.Image}} {{.Ports}}"
+
+stop the container
+ansible localhost -m docker_container -a "name=test-ghost state=absent"
+
+to tag use this
+ansible-playbook build.yaml -e tag=v2
