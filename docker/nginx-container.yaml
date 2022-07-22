@@ -1,0 +1,35 @@
+- name: Create Contianer Nginx
+  hosts: localhost
+  connection: local
+  become: True
+  tasks:
+
+    - name: Create certs directory
+      file:
+        path: "{{ certs_dir }}"
+        state: directory
+        mode: '0750'
+
+    - name: Generate tls certs
+      command: >
+        openssl req -new -x509 -nodes
+        -out "{{ certs_dir }}/nginx.crt"
+        -keyout "{{ certs_dir }}/nginx.key"
+        -subj "/CN={{ ansible_host }}" -days 90
+      args:
+        creates: certs/nginx.crt
+
+    - name: Start nginx container
+      docker_container:
+        name: nginx_ghost
+        image: bbaassssiiee/nginx-ghost
+        container_default_behavior: compatibility
+        network_mode: "{{ net_name }}"
+        networks:
+          - name: "{{ net_name }}"
+        pull: true
+        ports:
+          - "0.0.0.0:80:80"
+          - "0.0.0.0:443:443"
+        volumes:
+          - "{{ certs_dir }}:/certs"
