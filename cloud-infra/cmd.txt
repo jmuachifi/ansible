@@ -1,0 +1,14 @@
+# python3 -m venv --system-site-packages /usr/local
+# source /usr/local/bin/activate
+(local) # pip3 install boto3
+
+$ ansible-galaxy collection list|grep amazon.aws
+
+$ ansible-galaxy collection install amazon.aws
+
+$ ansible-inventory --list|jq -r .aws_ec2
+
+ansible-vault encrypt secrets.yml
+
+
+ansible-playbook create-ec2-v2.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/local/bin/python3" --ask-vault-pass
