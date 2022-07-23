@@ -1,0 +1,10 @@
+---
+- name: Run ansible-lint with the roles
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: yes
+  roles:
+    - ssh
+    - miniconda
+    - redis

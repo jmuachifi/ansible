@@ -1,0 +1,13 @@
+#create a simple role
+ansible-galaxy role init my_role
+
+#create role with  molecule
+molecule init role acme.my_new_role --driver-name docker
+
+#install some package
+pip install ansible-later
+
+#To use TestInfra as a verifier, install it first
+pip install pytest-testinfra
+
+molecule init scenario -r ssh --driver-name docker --verifier-name testinfra testinfra

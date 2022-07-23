@@ -1,0 +1,8 @@
+#create a starting point for a new user-created collection
+ansible-galaxy collection init ansiblebook.the_bundle
+
+ansible-galaxy collection build
+
+ansible-galaxy collection install  a_namespace-the_bundle-1.0.0.tar.gz -p ./collections
+
+ansible-galaxy collection publish path/to/a_namespace-the_bundle-1.0.0.tar.gz

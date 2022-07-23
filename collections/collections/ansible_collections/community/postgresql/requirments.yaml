@@ -1,0 +1,16 @@
+---
+roles:
+  - src: leonallen22.ansible_role_keybase
+    name: keybase
+  - src: https://github.com/dockpack/base_tailscale.git
+    name: tailscale
+collections:
+  - check_point.gaia
+  - check_point.mgmt
+  - cyberark.conjur
+  - cyberark.pas
+  - fortinet.fortios
+  - ibm.isam
+  - junipernetworks.junos
+  - paloaltonetworks.panos
+...

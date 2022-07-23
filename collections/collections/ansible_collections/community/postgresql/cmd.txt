@@ -1,0 +1,2 @@
+#create a starting point for a new user-created collection
+ansible-galaxy collection init ansiblebook.the_bundle
