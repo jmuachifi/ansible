@@ -1,0 +1,17 @@
+---
+- name: myplay
+  hosts: rocky
+  tasks:
+    - name: task1
+      debug:
+        msg: hello world
+    - name: task2
+      debug:
+        msg: hello task2
+
+- name: ubuntusettings
+  hosts: lubuntu
+  tasks:
+    - name: hello lubuntu
+      debug:
+        msg: hello lubuntu

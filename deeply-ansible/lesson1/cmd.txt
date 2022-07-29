@@ -1,0 +1,28 @@
+Ad-hoc Commands
+
+# set up user host 
+ansible -i inventory lubuntu -m user -a "name=ansible create_home=yes" -u linux -b -k -K
+
+#set up a group of host
+ansible -i inventory rocky -m user -a "name=ansible" -u linux -k
+
+
+ansible -i inventory on rocky - m shell -a "echo 'ansible:password' | chpasswd" -u linux -b -k -K
+ansible -i inventory on rocky - m shell -a echo password | passwd --stdin ansible -u root -k
+
+ansible -i inventory all -m command -a "id" -u ansible
+
+#Setting up privilege escalation
+echo 'ansible ALL=(ALL) NOPASSWD:ALL'>/tmp/sudoers
+sudo cp /tmp/sudoers /etc/sudoers.d/ansible
+ansible rocky -i inventory -u root -k -m copy -a "src=/tmp/sudoers dest=/etc/sudoers.d/ansible"
+ansible lubuntu -i inventory -u linux -k -b -K -m copy -a "src=/tmp/sudoers dest=/etc/sudoers.d/ansible"
+ansible -i inventory lubuntu -m command -a "ls -l /root" -b
+
+#Other Commands
+#You can also have a more complete file that includes existing plugins:
+ansible-config init --disabled -t all > ansible.cfg
+
+#test ping hosts
+ansible lubuntu -m ping -u linux -b -k -K
+ansible rocky -m ping -u root -k

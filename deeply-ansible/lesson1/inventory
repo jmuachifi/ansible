@@ -1,0 +1,6 @@
+lubuntu	ansible_host=192.168.1.102 
+
+[rocky]
+ansible1 ansible_host=192.168.2.102
+ansible2 ansible_host=192.168.3.102
+

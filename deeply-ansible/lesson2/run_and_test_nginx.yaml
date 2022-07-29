@@ -1,0 +1,44 @@
+---
+- name: install start anable nginx
+  hosts: rocky
+  gather_facts: false
+  tasks:
+    - name: install package
+      apt:
+        name: nginx
+        state: latest
+        
+    - name: install ufw
+      apt:
+        name: ufw
+        state: latest
+
+    - name: start and enable service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: ufw enabled
+      community.general.ufw:
+        state: "enabled"
+        policy: "deny"
+        logging: "on"
+    - name: ufw rules
+      community.general.ufw:
+        rule: "allow"
+        port: "{{ item }}"
+        proto: "tcp"
+      with_items:
+        - "22"
+        - "80"
+        - "443"
+        
+- name: test nginx accebility
+  become: false
+  gather_facts: no
+  hosts: localhost
+  tasks:
+    - name: test nginx access
+      uri:
+        url: http://192.168.2.102
