@@ -1,0 +1,6 @@
+---
+- name: lab5
+  hosts: webservers
+  tasks:
+  - debug: 
+      msg: using {{ web_package }} and {{ webservers }}
