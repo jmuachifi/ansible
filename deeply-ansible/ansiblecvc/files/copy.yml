@@ -10,8 +10,8 @@
     blockinfile:
       path: /tmp/hosts
       block: | 
-        192.168.4.110 host1.example.com
-        192.168.4.120 host2.example.com
+        192.168.1.102 host1.example.com
+        192.168.1.103 host2.example.com
       state: present
   - name: verify file checksum
     stat:

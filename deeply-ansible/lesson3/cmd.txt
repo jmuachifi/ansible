@@ -1,4 +1,7 @@
 ansible ansible1 -m setup > ansible1_facts.txt
 
-# on my machine work with
+#On my machine work with
 ansible lubuntu -m setup -u linux -b -k -K > ansible1_facts.txt
+
+#When some thing went wrong do this:
+ansible [hostname or ip andress] -m setup | less
