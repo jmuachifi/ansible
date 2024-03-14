@@ -7,6 +7,7 @@ sudo apt install software-properties-common
 udo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
+You can check the ansible documentation by clicnking [here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu)<br>
 ## Edit host file
 Edit /etc/ansible/hosts to include the IP addresses of client server <br>
 ```
@@ -26,5 +27,5 @@ ansible_ssh_private_key_file=~/.ssh/aws-key-lab2024.pem
 ```
 ansible ec2_instances -m ping -k
 ```
-![](./image/)
+![](./images/cloud-infra/aws-enginx/images/ansible-test-ping-aws-ec2.png)
 Please, don't put the  name of the server inside «»
