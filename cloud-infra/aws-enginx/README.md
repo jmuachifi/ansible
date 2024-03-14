@@ -16,8 +16,8 @@ sudo vim /etc/ansible/hosts
 Put the instruction below into hosts file and change according to your needs.
 ```
 [ec2_instances]
-public_instance-0 ansible_host=54.191.155.198
-public_instance-1 ansible_host=34.219.162.63
+public_instance-0 ansible_host=ip_addr_here
+public_instance-1 ansible_host=ip_addr_here
 [ec2_instances:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=ubuntu
