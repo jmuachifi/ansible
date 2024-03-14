@@ -27,5 +27,16 @@ ansible_ssh_private_key_file=~/.ssh/aws-key-lab2024.pem
 ```
 ansible ec2_instances -m ping -k
 ```
-![](https://github.com/jmuachifi/ansible/blob/main/cloud-infra/aws-enginx/images/ansible-test-ping-aws-ec2.png)
-Please, don't put the  name of the server inside «»
+![](https://github.com/jmuachifi/ansible/blob/main/cloud-infra/aws-enginx/images/ansible-test-ping-aws-ec2.png) <br>
+
+### The ansible-inventory command is part of Ansible and can be used to list information about the configured inventory.<br>
+![](https://github.com/jmuachifi/ansible/blob/main/cloud-infra/aws-enginx/images/ansible-list-inventory.png) <br>
+
+### To run an Ansible playbook, you need to use the ansible-playbook command followed by the filename of your playbook.<br>
+```
+ansible-playbook pdate_enginx.yml
+```
+![](https://github.com/jmuachifi/ansible/blob/main/cloud-infra/aws-enginx/images/ansible-playbook-enginx-output-success.png) <br>
+
+### Web Content Deployment
+![](https://github.com/jmuachifi/ansible/blob/main/cloud-infra/aws-enginx/images/aws-lab-it-works.png)
