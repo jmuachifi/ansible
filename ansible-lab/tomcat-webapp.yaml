@@ -1,0 +1,8 @@
+---
+- hosts: ansible-server
+  
+  tasks:
+  - name: Create docker image
+    command: sudo docker build -t tomcat-webapp:latest .
+    args: 
+      chdir: /opt/docker

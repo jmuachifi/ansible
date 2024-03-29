@@ -1,0 +1,33 @@
+# ---
+# - hosts: dockerhost
+
+#   tasks:
+#   - name: Remove all Docker containers
+#     #command: docker rm -f $(docker ps -qa)
+#     shell: docker rm -f $(docker ps -qa)
+#     ignore_errors: yes
+
+#   - name: Remove all Docker images
+#     #command: docker image rm -f $(docker image ls -aq)
+#     shell: docker image rm -f $(docker image ls -q)
+#     ignore_errors: yes
+
+#   - name: Create a new container
+#     command: docker run -d --name tomcat-webapp -p 8082:8080 jmuachifi/tomcat-webapp:latest
+---
+- hosts: dockerhost
+
+  tasks:
+  - name: Stop Docker container
+    command: docker container stop tomcat-webapp
+    ignore_errors: yes
+  - name: Remove Docker container
+    command: docker container rm tomcat-webapp
+    ignore_errors: yes
+
+  - name: Remove Docker image
+    command: docker image rm -f jmuachifi/tomcat-webapp:latest
+    ignore_errors: yes
+
+  - name: Create a new container
+    command: docker run -d --name tomcat-webapp -p 8082:8080 jmuachifi/tomcat-webapp:latest

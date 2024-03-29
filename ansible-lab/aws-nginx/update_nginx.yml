@@ -1,0 +1,29 @@
+# update_enginx.yml is a playbook that updates the nginx server
+
+---
+- name: Update Nginx and copy aws-lab.html file to EC2 instances
+  hosts: ec2_instances
+  become: true
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+    
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+    
+    - name: Copy aws-lab.html file to /var/www/html
+      copy:
+        src: ./aws-lab.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Ensure Nginx service  is running
+      systemd:
+        name: nginx
+        state: started
