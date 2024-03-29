@@ -1,0 +1,11 @@
+---
+- hosts: k8shost
+
+  tasks:
+  - name: Delete tomcat-webapp deployment, sercice and ingress
+    command: kubectl delete -f /opt/k8s/k8s-tomcat-webapp.yaml -n tests
+    ignore_errors: yes
+  - name: Deploy tomcat-webapp using k8s deployment, service and ingress
+    command: kubectl apply -f /opt/k8s/k8s-tomcat-webapp.yaml -n tests
+  - name: Update deployment with new pods if the image updated in dockerhub
+    command: kubectl rollout restart deployment tomcat-webapp -n tests

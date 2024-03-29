@@ -1,8 +1,17 @@
 ---
-- hosts: ansible-server
+- hosts: k8shost
   
   tasks:
+  - name: Remove existing docker image - 1
+    command: sudo docker rmi -f tomcat-webapp:latest
+  - name: Remove existing docker image - 2
+    command: sudo docker rmi -f jmuachifi/tomcat-webapp:latest
+    ignore_errors: yes
   - name: Create docker image
     command: sudo docker build -t tomcat-webapp:latest .
     args: 
-      chdir: /opt/docker
+      chdir: /opt/k8s
+  - name: Create tag to push image to docker hub
+    command: sudo docker tag tomcat-webapp:latest jmuachifi/tomcat-webapp:latest
+  - name: Push image to docker hub
+    command: sudo docker push jmuachifi/tomcat-webapp:latest

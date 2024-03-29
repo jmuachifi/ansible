@@ -1,0 +1,55 @@
+# Deploy tomcat webapp using k8s deployment, service and ingress
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-webapp-deployment
+  labels:
+    app: tomcat-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-webapp
+  template:
+    metadata:
+      labels:
+        app: tomcat-webapp
+    spec:
+      containers:
+      - name: tomcat-webapp
+        image: jmuachifi/tomcat-webapp:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-webapp-svc
+  labels:
+    app: tomcat-webapp
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: tomcat-webapp
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tomcat-webapp-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: tomcat-webapp.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tomcat-webapp-svc
+            port:
+              number: 8080
